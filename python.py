@@ -1,13 +1,15 @@
-import tinydb
+from tinydb import TinyDB, Query
 import getpass
 def initial():
     print "Welcome to The Club"
     accountyn = raw_input("Do you have an account? Y/N")
     accountyn = accountyn.lower()
-    if accountyn = y:
+    if accountyn == "y":
         login()
-    else:
+    elif accountyn == "n":
         signup()
+    else:
+        initial()
 
 def signup():
     
