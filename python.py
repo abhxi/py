@@ -1,5 +1,6 @@
 from tinydb import TinyDB, Query, where
 import getpass
+
 userinfo = TinyDB("userinfo.json")
 
 def initial():
@@ -16,6 +17,8 @@ def initial():
 def signup():
     print "Start by choosing a username."
     newusername = raw_input("Username:")
+    if userinfo.contains(where("Username") == newusername):
+        fail_user_taken()
     print "Now choose a password."
     newpassword = getpass.getpass("Password:")
     userinfo.insert({"Username": newusername, "Password": newpassword})
@@ -44,4 +47,12 @@ def fail():
     else:
         print "Have a nice day!"
 
+def fail_user_taken():
+    print "The username is already taken"
+    tryagain = raw_input("Would you like to try again? Y/N")
+    tryagain = tryagain.lower()
+    if tryagain == "y":
+        signup()
+    else:
+        print "Have a nice day!"
 initial()
