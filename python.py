@@ -14,5 +14,8 @@ def signup():
     print "Start by choosing a username."
     newusername = raw_input("Username:")
     print "Now choose a password."
-    new_password = getpass.getpass("Password:")
-    
+    newpassword = getpass.getpass("Password:")
+    userinfo = TinyDB("userinfo.json")
+    userinfo.insert({newusername: newpassword})
+    print userinfo.all()
+
