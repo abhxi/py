@@ -1,4 +1,4 @@
-from tinydb import TinyDB, Query
+from tinydb import TinyDB, Query, where
 import getpass
 userinfo = TinyDB("userinfo.json")
 
@@ -18,6 +18,30 @@ def signup():
     newusername = raw_input("Username:")
     print "Now choose a password."
     newpassword = getpass.getpass("Password:")
-    userinfo.insert({newusername: newpassword})
+    userinfo.insert({"Username": newusername, "Password": newpassword})
+    print "Thanks! Now you can log in with your new account."
+    login()
+
+def login():
+    print "Enter your username."
+    usernametry = raw_input("Username: ")
+    print "Now enter your password."
+    passwordtry = getpass.getpass("Password: ")
+    if userinfo.contains((where("Username") == usernametry) & (where("Password") == passwordtry)):
+        success()
+    else:
+        fail()
+    
+def success():
+    print "Success!"
+
+def fail():
+    print "Your username or password was incorrect."
+    tryagain = raw_input("Would you like to try again? Y/N ")
+    tryagain = tryagain.lower()
+    if tryagain == "y":
+        login()
+    else:
+        print "Have a nice day!"
 
 initial()
