@@ -19,7 +19,8 @@ def signup():
     newusername = raw_input("Username:")
     if userinfo.contains(where("Username") == newusername):
         fail_user_taken()
-    print "Now choose a password."
+    else:
+        print "Now choose a password."
     newpassword = getpass.getpass("Password:")
     userinfo.insert({"Username": newusername, "Password": newpassword})
     print "Thanks! Now you can log in with your new account."
@@ -48,11 +49,13 @@ def fail():
         print "Have a nice day!"
 
 def fail_user_taken():
-    print "The username is already taken"
-    tryagain = raw_input("Would you like to try again? Y/N")
+    print "The username is already taken."
+    tryagain = raw_input("Would you like to try again? Y/N ")
     tryagain = tryagain.lower()
     if tryagain == "y":
         signup()
     else:
         print "Have a nice day!"
+
+
 initial()
